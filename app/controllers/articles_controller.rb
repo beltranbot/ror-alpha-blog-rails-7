@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = "Article was created successfully."
       # redirect after creation
       redirect_to @article
-      # above is shortcut for: redirect_to article_path(@article)
+      # above is shortcut for: redirect_to articles_path(@article)
     else
       # if it hits a validation error
       render :new, status: 422
@@ -39,6 +39,12 @@ class ArticlesController < ApplicationController
     else
       render :edit, status: 422
     end
+  end
+
+  def destroy
+    @article = Article.find params[:id]
+    @article.destroy
+    redirect_to articles_path
   end
 
 end
